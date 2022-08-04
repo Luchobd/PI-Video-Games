@@ -112,7 +112,7 @@ router.get("/videogame/:idVideogame", async (req, res) => {
   try {
     if (idVideogame) {
       const videoGameId = allVideogames.filter(
-        (item) => item.id == idVideogame
+        (item) => item.id.toString() === idVideogame
       );
 
       videoGameId.length
