@@ -1,0 +1,15 @@
+.nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+ul li .navbar__link {
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+}
+
+ul li .navbar__link:hover {
+  color: #008000;
+}

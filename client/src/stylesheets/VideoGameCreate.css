@@ -1,0 +1,22 @@
+.form {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form div {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+input,
+textarea,
+select {
+  margin-bottom: 20px;
+}
+
+.btn__form {
+  cursor: pointer;
+}

@@ -129,6 +129,7 @@ router.get("/gender", async (req, res) => {
   const genderURL = `https://api.rawg.io/api/genres?key=${API_KEY}`;
   const genderApi = await axios.get(genderURL);
   const genderInfo = await genderApi.data.results.map((gender) => gender.name);
+
   try {
     genderInfo.forEach((item) => {
       Gender.findOrCreate({
