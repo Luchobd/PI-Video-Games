@@ -108,15 +108,39 @@ router.get("/videogames", async (req, res) => {
 // GET /videogame/{idVideogame}
 router.get("/videogame/:idVideogame", async (req, res) => {
   const { idVideogame } = req.params;
-  const allVideogames = await getAllVideogames();
+  // const allVideogames = await getAllVideogames();
+  const videogamesId = await axios.get(
+    `https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`
+  );
   try {
     if (idVideogame) {
-      const videoGameId = allVideogames.filter(
-        (item) => item.id.toString() === idVideogame
-      );
+      const {
+        id,
+        name,
+        description,
+        released,
+        background_image,
+        rating,
+        genres,
+        platforms,
+      } = videogamesId.data;
+      const detailVideogames = {
+        id,
+        name,
+        description,
+        released,
+        background_image,
+        rating,
+        genres: genres.map((item) => item.name),
+        platforms: platforms.map((item) => item.platform.name),
+      };
 
-      videoGameId.length
-        ? res.status(200).json(videoGameId)
+      // const videoGameId = allVideogames.filter(
+      //   (item) => item.id.toString() === idVideogame
+      // );
+
+      videogamesId
+        ? res.status(200).json(detailVideogames)
         : res.status(404).send("No found video game");
     }
   } catch (error) {
@@ -182,7 +206,7 @@ router.post("/videogames", async (req, res) => {
 
       createdVideoGames.addGender(genderDB);
 
-      res.status(200).send(createdVideoGames);
+      res.status(200).send("Videogame created successfully");
     }
   } catch (error) {
     res.status(404).send(error);
