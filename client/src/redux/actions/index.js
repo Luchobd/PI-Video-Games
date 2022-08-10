@@ -3,6 +3,9 @@ import axios from "axios";
 export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
 export const GET_GENDERS = "GET_GENDERS";
 export const FILTER_BY_GENDER = "FILTER_BY_GENDER";
+export const FILTER_BY_CREATED = "FILTER_BY_CREATED";
+export const ORDER_BY_NAME = "ORDER_BY_NAME";
+export const ORDER_BY_RATING = "ORDER_BY_RATING";
 
 // Conection from back to front
 // Ruta video games
@@ -42,6 +45,29 @@ export function getGenders() {
 export function filterVideogamesByGender(payload) {
   return {
     type: "FILTER_BY_GENDER",
+    payload,
+  };
+}
+
+export function filterVideogamesByCreated(payload) {
+  return {
+    type: "FILTER_BY_CREATED",
+    payload,
+  };
+}
+
+export function orderByName(payload) {
+  console.log(payload);
+  return {
+    type: "ORDER_BY_NAME",
+    payload,
+  };
+}
+
+export function orderByRating(payload) {
+  console.log(payload);
+  return {
+    type: "ORDER_BY_RATING",
     payload,
   };
 }

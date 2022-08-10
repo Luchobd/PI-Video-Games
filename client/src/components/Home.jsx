@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getVideogames,
-  filterVideogamesByGender,
   getGenders,
+  filterVideogamesByGender,
+  filterVideogamesByCreated,
+  orderByName,
+  orderByRating,
 } from "../redux/actions";
 import { NavLink } from "react-router-dom";
 import Card from "./Card";
@@ -18,6 +21,7 @@ function Home() {
   const allVideogames = useSelector((state) => state.videogames);
   const allGenders = useSelector((state) => state.genders);
 
+  const [order, setOrder] = useState("");
   // PAGINADO
   const [currentPage, setCurrentPege] = useState(1);
   const [videogamesPerPage, setVideogamesPerPage] = useState(15);
@@ -49,7 +53,26 @@ function Home() {
   };
 
   const handleFilterSelectGenders = (e) => {
+    e.preventDefault();
     dispatch(filterVideogamesByGender(e.target.value));
+  };
+
+  const handleFilterSelectCreated = (e) => {
+    e.preventDefault();
+    dispatch(filterVideogamesByCreated(e.target.value));
+  };
+
+  const handleOrderByName = (e) => {
+    e.preventDefault();
+    dispatch(orderByName(e.target.value));
+    setCurrentPege(1);
+    setOrder(`Ordenado ${e.target.value}`);
+  };
+  const handleOrderByRating = (e) => {
+    e.preventDefault();
+    dispatch(orderByRating(e.target.value));
+    setCurrentPege(1);
+    setOrder(`Ordenado ${e.target.value}`);
   };
 
   return (
@@ -62,12 +85,13 @@ function Home() {
 
       <div>
         {/* Botones/Opciones para ordenar tanto ascendentemente como descendentemente los videojuegos por orden alfabético y rating  */}
-        <select name="" id="">
-          <option value="order">Order</option>
+        <select name="" id="" onChange={(e) => handleOrderByRating(e)}>
           <optgroup label="Rating">
-            <option value="ascAlf">Ascending</option>
-            <option value="descAlf">Decendents</option>
+            <option value="ascRtg">Ascending</option>
+            <option value="descRtg">Decendents</option>
           </optgroup>
+        </select>
+        <select name="" id="" onChange={(e) => handleOrderByName(e)}>
           <optgroup label="Alphabetic">
             <option value="ascAlf">Ascending</option>
             <option value="descAlf">Decendents</option>
@@ -75,7 +99,7 @@ function Home() {
         </select>
 
         {/* Botones/Opciones para filtrar por género y por videojuego existente o agregado por nosotros */}
-        <select name="" id="" onChange={(e) => handleFilterSelectGenders(e)}>
+        <select name="" id="" onChange={(e) => handleFilterSelectCreated(e)}>
           <option value="All">All...</option>
           <optgroup label="API">
             <option value="VideoGame">Video Games</option>
@@ -83,6 +107,9 @@ function Home() {
           <optgroup label="Created">
             <option value="VideoGameCreated">Video Games Created</option>
           </optgroup>
+        </select>
+        <select name="" id="" onChange={(e) => handleFilterSelectGenders(e)}>
+          <option value="All">All...</option>
           <optgroup label="Genders">
             {allGenders?.map((el) => (
               <option value={el.name} key={el.id}>
@@ -92,7 +119,7 @@ function Home() {
           </optgroup>
         </select>
       </div>
-
+      {/* onChange={(e) => handleFilterSelectCreated(e)} */}
       {/* Área donde se verá el listado de videojuegos. Deberá mostrar su: */}
       <Paginated
         videogamesPerPage={videogamesPerPage}
@@ -105,7 +132,8 @@ function Home() {
             <NavLink className={"link"} to={`/home/${game.id}`}>
               <Card
                 name={game.name}
-                genders={game.gender.join(" ")}
+                genders={game.genders}
+                rating={game.rating}
                 background_image={game.background_image}
               />
             </NavLink>
@@ -116,6 +144,6 @@ function Home() {
   );
 }
 
-// 38:20 -> video 3
+// 1:17:00 -> video 3
 
 export default Home;

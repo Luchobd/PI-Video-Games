@@ -31,7 +31,7 @@ const getApiInfo = async () => {
       name: game.name,
       released: game.released,
       rating: game.rating,
-      gender: game.genres.map((item) => item.name),
+      genders: game.genres.map((item) => item.name),
       platforms: game.platforms.map((item) => item.platform.name),
       background_image: game.background_image,
       description: game.description,
@@ -152,7 +152,7 @@ router.get("/videogame/:idVideogame", async (req, res) => {
 router.get("/gender", async (req, res) => {
   const genderURL = `https://api.rawg.io/api/genres?key=${API_KEY}`;
   const genderApi = await axios.get(genderURL);
-  const genderInfo = await genderApi.data.results.map((gender) => gender.name);
+  const genderInfo = await genderApi.data.results.map((item) => item.name);
 
   try {
     genderInfo.forEach((item) => {
@@ -180,37 +180,37 @@ router.post("/videogames", async (req, res) => {
     gender,
     background_image,
   } = req.body;
-  try {
-    if (
-      allVideogames.find(
-        (item) =>
-          item.name.replace(/\s+/g, "").toLowerCase() ===
-          name.replace(/\s+/g, "").toLowerCase()
-      )
-    ) {
-      res.status(404).send("the game exists!!");
-    } else {
-      const createdVideoGames = await Videogame.create({
-        name,
-        description,
-        released,
-        rating,
-        platforms,
-        createdInDb: true,
-        background_image,
-      });
+  // try {
+  if (
+    allVideogames.find(
+      (item) =>
+        item.name.replace(/\s+/g, "").toLowerCase() ===
+        name.replace(/\s+/g, "").toLowerCase()
+    )
+  ) {
+    res.status(404).send("the game exists!!");
+  } else {
+    const createdVideoGames = await Videogame.create({
+      name,
+      description,
+      released,
+      rating,
+      platforms,
+      createdInDb: true,
+      background_image,
+    });
 
-      let genderDB = await Gender.findAll({
-        where: { name: gender },
-      });
+    let genderDB = await Gender.findAll({
+      where: { name: gender },
+    });
 
-      createdVideoGames.addGender(genderDB);
+    createdVideoGames.addGender(genderDB);
 
-      res.status(200).send("Videogame created successfully");
-    }
-  } catch (error) {
-    res.status(404).send(error);
+    res.status(200).send("Videogame created successfully");
   }
+  // } catch (error) {
+  //   res.status(404).send(error);
+  // }
 });
 
 module.exports = router;

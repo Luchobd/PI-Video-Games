@@ -1,4 +1,11 @@
-import { GET_VIDEOGAMES, GET_GENDERS, FILTER_BY_GENDER } from "../actions";
+import {
+  GET_VIDEOGAMES,
+  GET_GENDERS,
+  FILTER_BY_GENDER,
+  FILTER_BY_CREATED,
+  ORDER_BY_NAME,
+  ORDER_BY_RATING,
+} from "../actions";
 const initialState = {
   videogames: [],
   allVideogames: [],
@@ -27,13 +34,62 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allVideogames
           : allVideogames.filter((game) =>
-              game.gender.find((el) => el === action.payload)
+              game.genders.find((el) => el === action.payload)
             );
 
       return {
         ...state,
         videogames: genderFiltered,
       };
+
+    case FILTER_BY_CREATED:
+      const createdFilter =
+        action.payload === "VideoGameCreated"
+          ? state.allVideogames.filter((game) => game.createdInDb)
+          : state.allVideogames.filter((game) => !game.createdInDb);
+
+      return {
+        ...state,
+        videogames:
+          action.payload === "All" ? state.allVideogames : createdFilter,
+      };
+
+    case ORDER_BY_NAME:
+      const sortedAlf =
+        action.payload === "ascAlf"
+          ? state.videogames.sort((a, b) => {
+              if (a.name > b.name) return 1;
+              if (a.name < b.name) return -1;
+              return 0;
+            })
+          : state.videogames.sort((a, b) => {
+              if (a.name > b.name) return -1;
+              if (a.name < b.name) return 1;
+              return 0;
+            });
+      return {
+        ...state,
+        videogames: sortedAlf,
+      };
+
+    case ORDER_BY_RATING:
+      const sortedRtg =
+        action.payload === "ascRtg"
+          ? state.videogames.sort((a, b) => {
+              if (a.rating > b.rating) return 1;
+              if (a.rating < b.rating) return -1;
+              return 0;
+            })
+          : state.videogames.sort((a, b) => {
+              if (a.rating > b.rating) return -1;
+              if (a.rating < b.rating) return 1;
+              return 0;
+            });
+      return {
+        ...state,
+        videogames: sortedRtg,
+      };
+
     default:
       return { ...state };
   }
