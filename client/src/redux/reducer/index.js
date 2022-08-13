@@ -1,16 +1,19 @@
 import {
   GET_VIDEOGAMES,
   GET_GENDERS,
+  GET_NAME_VIDEOGAMES,
   FILTER_BY_GENDER,
   FILTER_BY_CREATED,
   ORDER_BY_NAME,
   ORDER_BY_RATING,
+  POST_VIDEOGAME,
+  GET_DETAILS,
 } from "../actions";
 const initialState = {
   videogames: [],
   allVideogames: [],
   genders: [],
-  newArray: [],
+  detail: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -21,10 +24,23 @@ function rootReducer(state = initialState, action) {
         videogames: [...action.payload],
         allVideogames: [...action.payload],
       };
+
     case GET_GENDERS:
       return {
         ...state,
         genders: action.payload,
+      };
+
+    case GET_NAME_VIDEOGAMES:
+      return {
+        ...state,
+        videogames: [...action.payload],
+      };
+
+    case GET_DETAILS:
+      return {
+        ...state,
+        detail: action.payload,
       };
 
     case FILTER_BY_GENDER:
@@ -40,6 +56,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         videogames: genderFiltered,
+      };
+
+    case POST_VIDEOGAME:
+      return {
+        ...state,
       };
 
     case FILTER_BY_CREATED:

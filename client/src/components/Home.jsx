@@ -13,6 +13,7 @@ import Card from "./Card";
 import SearchBar from "./SearchBar";
 import Paginated from "./Paginated";
 import "../stylesheets/Home.css";
+import NavBar from "./NavBar";
 
 function Home() {
   // usar hooks
@@ -77,6 +78,7 @@ function Home() {
 
   return (
     <div>
+      <NavBar />
       <SearchBar />
       {/* reset all */}
       <button onClick={(e) => handleClick(e)}>
@@ -129,12 +131,21 @@ function Home() {
       {currentVideogames?.map((game) => {
         return (
           <div key={game.id}>
-            <NavLink className={"link"} to={`/home/${game.id}`}>
+            <NavLink className={"link"} to={`/videogame/${game.id}`}>
               <Card
                 name={game.name}
                 genders={game.genders}
                 rating={game.rating}
-                background_image={game.background_image}
+                background_image={
+                  game.background_image ? (
+                    game.background_image
+                  ) : (
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVjBJWlHCDYQu_KapwEg1c3SFFxYoW3bpvmQ&usqp=CAU"
+                      alt="Default_Image"
+                    />
+                  )
+                }
               />
             </NavLink>
           </div>

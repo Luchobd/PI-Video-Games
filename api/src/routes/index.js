@@ -107,13 +107,15 @@ router.get("/videogames", async (req, res) => {
 
 // GET /videogame/{idVideogame}
 router.get("/videogame/:idVideogame", async (req, res) => {
-  const { idVideogame } = req.params;
+  const idVideogame = req.params.idVideogame;
   // const allVideogames = await getAllVideogames();
-  const videogamesId = await axios.get(
-    `https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`
-  );
-  try {
-    if (idVideogame) {
+
+  // ===========================
+  const dbInfo = await getDBInfo();
+  const findDBInfo = dbInfo.find((item) => item.id.toString() === idVideogame);
+  console.log(findDBInfo);
+  if (idVideogame) {
+    if (findDBInfo) {
       const {
         id,
         name,
@@ -121,31 +123,98 @@ router.get("/videogame/:idVideogame", async (req, res) => {
         released,
         background_image,
         rating,
-        genres,
+        genders,
         platforms,
-      } = videogamesId.data;
-      const detailVideogames = {
+      } = findDBInfo;
+
+      const detailDBVideogames = {
         id,
         name,
         description,
         released,
         background_image,
         rating,
+        genders: genders.map((item) => item.name),
+        platforms: platforms,
+      };
+      res.status(200).json(detailDBVideogames);
+    } else if (!findDBInfo) {
+      const videogamesId = await axios.get(
+        `https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`
+      );
+      const videogamesData = [videogamesId.data];
+      const findVideogames = videogamesData.find(
+        (item) => item.id.toString() === idVideogame
+      );
+      const {
+        id,
+        name,
+        description_raw,
+        released,
+        background_image,
+        rating,
+        genres,
+        platforms,
+      } = findVideogames;
+
+      const detailVideogames = {
+        id,
+        name,
+        description_raw,
+        released,
+        background_image,
+        rating,
         genres: genres.map((item) => item.name),
         platforms: platforms.map((item) => item.platform.name),
       };
-
-      // const videoGameId = allVideogames.filter(
-      //   (item) => item.id.toString() === idVideogame
-      // );
-
-      videogamesId
-        ? res.status(200).json(detailVideogames)
-        : res.status(404).send("No found video game");
+      res.status(200).json(detailVideogames);
     }
-  } catch (error) {
-    res.status(404).send("Not Found");
+  } else {
+    res.status(404).send("No Existe");
   }
+
+  // const prueba = [...allVideogames, ...videogamesIdTest.data];
+
+  // const videoGameId = allVideogames.filter(
+  //   (item) => item.id.toString() === idVideogame
+  // );
+
+  // try {
+  //   return res.status(200).json(videoGameId);
+  // } catch (error) {
+  //   console.log(error.message);
+  // }
+
+  // try {
+  //   if (idVideogame) {
+  //     const {
+  //       id,
+  //       name,
+  //       description_raw,
+  //       released,
+  //       background_image,
+  //       rating,
+  //       genres,
+  //       platforms,
+  //     } = videogamesId.data;
+  //     const detailVideogames = {
+  //       id,
+  //       name,
+  //       description_raw,
+  //       released,
+  //       background_image,
+  //       rating,
+  //       genres: genres.map((item) => item.name),
+  //       platforms: platforms.map((item) => item.platform.name),
+  //     };
+
+  //     videogamesId
+  //       ? res.status(200).json(detailVideogames)
+  //       : res.status(404).send("No found video game");
+  //   }
+  // } catch (error) {
+  //   res.status(404).send("Not Found");
+  // }
 });
 
 // GET /genders

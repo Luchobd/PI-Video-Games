@@ -21,7 +21,6 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       released: {
-        //DATEONLY
         type: DataTypes.STRING,
       },
       rating: {
@@ -39,13 +38,13 @@ module.exports = (sequelize) => {
       createdInDb: {
         type: DataTypes.BOOLEAN,
         default: true,
-        allowNull: false,
+        // allowNull: false,
       },
     },
     {
       timestamps: false, //  Son las dos (createdAt,updatedAt)
-      // createdAt: false, // muestra cuando añado un nuevo un juego
-      // updatedAt: false, // Muestra la modificacion dle video juego
+      createdAt: false, // muestra cuando añado un nuevo un juego
+      updatedAt: false, // Muestra la modificacion dle video juego
     }
   );
 };

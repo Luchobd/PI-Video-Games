@@ -17,11 +17,7 @@ function NavBar() {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink className={"navbar__link"} to={"/game/:id"}>
-              Video Game Detail
-            </NavLink>
-          </li>
+
           <li>
             <NavLink className={"navbar__link"} to={"/videogame"}>
               Video Game Creation
