@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getNameVideogames } from "../redux/actions";
+import "../stylesheets/SearchBar.css";
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -21,14 +22,17 @@ function SearchBar() {
   return (
     <>
       {/* Input de búsqueda para encontrar videojuegos por nombre */}
-      <form action="" onSubmit={(e) => handeleSubmit(e)}>
+      <form className="search__form" onSubmit={(e) => handeleSubmit(e)}>
         <input
           type="text"
           placeholder="Search..."
           value={name}
+          className="search__form_input"
           onChange={(e) => handeleInputChange(e)}
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="search__form_btn">
+          Search
+        </button>
       </form>
     </>
   );

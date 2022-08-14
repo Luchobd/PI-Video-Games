@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;1,900&display=swap");
+
+/* Selects */
+.home__container_select {
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home__title_select {
+  text-align: center;
+  color: #ffefd5;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+
+.home__option_select {
+  padding: 3px 0;
+  background-color: transparent;
+  text-align: center;
+  font-weight: bold;
+  color: #805300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 2px solid #ffefd5;
+  border-radius: 10px;
+}
+
+.home__btn_reset {
+  padding: 0 5px;
+  border-radius: 10px 5px 10px 5px;
+  background-color: transparent;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  color: #ffd700;
+  cursor: pointer;
+}
+
+.home__btn_reset:hover {
+  transform: rotate(180deg);
+  transition: transform 0.5s linear 0.1s;
+  box-shadow: 0 0 30px #ffd700;
+  cursor: pointer;
+}

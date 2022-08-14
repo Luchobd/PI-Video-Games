@@ -40,21 +40,6 @@ const getApiInfo = async () => {
   return apiGamesInfo;
 };
 
-// // Guardar en la DB
-// apiGamesInfo.forEach((e) => {
-//   Videogame.bulkCreate([
-//     {
-//       name: e.name,
-//       description: e.description,
-//       release_date: e.released,
-//       rating: e.rating,
-//       genres: e.genres,
-//       platforms: e.platforms,
-//       background_image: e.background_image,
-//     },
-//   ]);
-// });
-
 // informacion de la Base de Datos
 const getDBInfo = async () => {
   return await Videogame.findAll({
@@ -108,9 +93,7 @@ router.get("/videogames", async (req, res) => {
 // GET /videogame/{idVideogame}
 router.get("/videogame/:idVideogame", async (req, res) => {
   const idVideogame = req.params.idVideogame;
-  // const allVideogames = await getAllVideogames();
 
-  // ===========================
   const dbInfo = await getDBInfo();
   const findDBInfo = dbInfo.find((item) => item.id.toString() === idVideogame);
   console.log(findDBInfo);
@@ -172,49 +155,6 @@ router.get("/videogame/:idVideogame", async (req, res) => {
   } else {
     res.status(404).send("No Existe");
   }
-
-  // const prueba = [...allVideogames, ...videogamesIdTest.data];
-
-  // const videoGameId = allVideogames.filter(
-  //   (item) => item.id.toString() === idVideogame
-  // );
-
-  // try {
-  //   return res.status(200).json(videoGameId);
-  // } catch (error) {
-  //   console.log(error.message);
-  // }
-
-  // try {
-  //   if (idVideogame) {
-  //     const {
-  //       id,
-  //       name,
-  //       description_raw,
-  //       released,
-  //       background_image,
-  //       rating,
-  //       genres,
-  //       platforms,
-  //     } = videogamesId.data;
-  //     const detailVideogames = {
-  //       id,
-  //       name,
-  //       description_raw,
-  //       released,
-  //       background_image,
-  //       rating,
-  //       genres: genres.map((item) => item.name),
-  //       platforms: platforms.map((item) => item.platform.name),
-  //     };
-
-  //     videogamesId
-  //       ? res.status(200).json(detailVideogames)
-  //       : res.status(404).send("No found video game");
-  //   }
-  // } catch (error) {
-  //   res.status(404).send("Not Found");
-  // }
 });
 
 // GET /genders
@@ -249,37 +189,37 @@ router.post("/videogames", async (req, res) => {
     gender,
     background_image,
   } = req.body;
-  // try {
-  if (
-    allVideogames.find(
-      (item) =>
-        item.name.replace(/\s+/g, "").toLowerCase() ===
-        name.replace(/\s+/g, "").toLowerCase()
-    )
-  ) {
-    res.status(404).send("the game exists!!");
-  } else {
-    const createdVideoGames = await Videogame.create({
-      name,
-      description,
-      released,
-      rating,
-      platforms,
-      createdInDb: true,
-      background_image,
-    });
+  try {
+    if (
+      allVideogames.find(
+        (item) =>
+          item.name.replace(/\s+/g, "").toLowerCase() ===
+          name.replace(/\s+/g, "").toLowerCase()
+      )
+    ) {
+      res.status(404).send("the game exists!!");
+    } else {
+      const createdVideoGames = await Videogame.create({
+        name,
+        description,
+        released,
+        rating,
+        platforms,
+        createdInDb,
+        background_image,
+      });
+      console.log(createdVideoGames);
+      let genderDB = await Gender.findAll({
+        where: { name: gender },
+      });
 
-    let genderDB = await Gender.findAll({
-      where: { name: gender },
-    });
+      createdVideoGames.addGender(genderDB);
 
-    createdVideoGames.addGender(genderDB);
-
-    res.status(200).send("Videogame created successfully");
+      res.status(200).send("Videogame created successfully");
+    }
+  } catch (error) {
+    res.status(404).send(error);
   }
-  // } catch (error) {
-  //   res.status(404).send(error);
-  // }
 });
 
 module.exports = router;

@@ -1,17 +1,23 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../stylesheets/NavBar.css";
+import MiniLogo from "../images/logo.png";
 
 function NavBar() {
   return (
-    <header>
+    <header className="header">
       <nav className="nav">
         <ul className="navUl">
-          <li>
-            <NavLink className={"navbar__link"} exact to={"/"}>
+          <picture className="navbar__logo">
+            <NavLink className={"navbar__link navbar__link_img"} exact to={"/"}>
+              <img src={MiniLogo} alt="Logo" className="navbar__link_img" />
+            </NavLink>
+          </picture>
+          {/* <li>
+            <NavLink className={"btn navbar__link"} exact to={"/"}>
               Principal
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink className={"navbar__link"} to={"/home"}>
               Home
@@ -20,7 +26,7 @@ function NavBar() {
 
           <li>
             <NavLink className={"navbar__link"} to={"/videogame"}>
-              Video Game Creation
+              Videogame Creation
             </NavLink>
           </li>
           <li>

@@ -25,7 +25,7 @@ function Home() {
   const [order, setOrder] = useState("");
   // PAGINADO
   const [currentPage, setCurrentPege] = useState(1);
-  const [videogamesPerPage, setVideogamesPerPage] = useState(15);
+  const [videogamesPerPage] = useState(15);
 
   const indexOfLastVideogames = currentPage * videogamesPerPage; // 15 - Indice final de video juegos
   const indexOfFirstVideogames = indexOfLastVideogames - videogamesPerPage; // 0 - Indice incial de video juegos
@@ -80,54 +80,82 @@ function Home() {
     <div>
       <NavBar />
       <SearchBar />
-      {/* reset all */}
-      <button onClick={(e) => handleClick(e)}>
-        Volver a cargar todos los video juegos
-      </button>
 
-      <div>
-        {/* Botones/Opciones para ordenar tanto ascendentemente como descendentemente los videojuegos por orden alfabético y rating  */}
-        <select name="" id="" onChange={(e) => handleOrderByRating(e)}>
-          <optgroup label="Rating">
-            <option value="ascRtg">Ascending</option>
-            <option value="descRtg">Decendents</option>
-          </optgroup>
-        </select>
-        <select name="" id="" onChange={(e) => handleOrderByName(e)}>
-          <optgroup label="Alphabetic">
-            <option value="ascAlf">Ascending</option>
-            <option value="descAlf">Decendents</option>
-          </optgroup>
-        </select>
-
-        {/* Botones/Opciones para filtrar por género y por videojuego existente o agregado por nosotros */}
-        <select name="" id="" onChange={(e) => handleFilterSelectCreated(e)}>
-          <option value="All">All...</option>
-          <optgroup label="API">
-            <option value="VideoGame">Video Games</option>
-          </optgroup>
-          <optgroup label="Created">
-            <option value="VideoGameCreated">Video Games Created</option>
-          </optgroup>
-        </select>
-        <select name="" id="" onChange={(e) => handleFilterSelectGenders(e)}>
-          <option value="All">All...</option>
-          <optgroup label="Genders">
-            {allGenders?.map((el) => (
-              <option value={el.name} key={el.id}>
-                {el.name}
-              </option>
-            ))}
-          </optgroup>
-        </select>
-      </div>
-      {/* onChange={(e) => handleFilterSelectCreated(e)} */}
-      {/* Área donde se verá el listado de videojuegos. Deberá mostrar su: */}
+      {/* Paginated */}
       <Paginated
         videogamesPerPage={videogamesPerPage}
         allVideogames={allVideogames.length}
         paginated={paginated}
       />
+
+      <div className="home__container_select">
+        {/* Botones/Opciones para ordenar tanto ascendentemente como descendentemente los videojuegos por orden alfabético y rating  */}
+        <section className="home__selection_select">
+          <h3 className="home__title_select">Rating</h3>
+          <select
+            className="home__option_select"
+            onChange={(e) => handleOrderByRating(e)}
+          >
+            <optgroup label="Rating">
+              <option value="ascRtg">Ascending</option>
+              <option value="descRtg">Decendents</option>
+            </optgroup>
+          </select>
+        </section>
+        <section className="home__selection_select">
+          <h3 className="home__title_select">Alphabetic</h3>
+          <select
+            className="home__option_select"
+            onChange={(e) => handleOrderByName(e)}
+          >
+            <optgroup label="Alphabetic">
+              <option value="ascAlf">Ascending</option>
+              <option value="descAlf">Decendents</option>
+            </optgroup>
+          </select>
+        </section>
+
+        {/* reset all */}
+        <button className="home__btn_reset" onClick={(e) => handleClick(e)}>
+          Reset <br />
+          Videogames
+        </button>
+
+        {/* Botones/Opciones para filtrar por género y por videojuego existente o agregado por nosotros */}
+        <section className="home__selection_select">
+          <h3 className="home__title_select">Videogames</h3>
+          <select
+            className="home__option_select"
+            onChange={(e) => handleFilterSelectCreated(e)}
+          >
+            <option value="All">All...</option>
+            <optgroup label="API">
+              <option value="VideoGame">Videogames</option>
+            </optgroup>
+            <optgroup label="Created">
+              <option value="VideoGameCreated">Videogames Created</option>
+            </optgroup>
+          </select>
+        </section>
+        <section className="home__selection_select">
+          <h3 className="home__title_select">Genders</h3>
+          <select
+            className="home__option_select"
+            onChange={(e) => handleFilterSelectGenders(e)}
+          >
+            <option value="All">All...</option>
+            <optgroup label="Genders">
+              {allGenders?.map((el) => (
+                <option value={el.name} key={el.id}>
+                  {el.name}
+                </option>
+              ))}
+            </optgroup>
+          </select>
+        </section>
+      </div>
+      {/* Área donde se verá el listado de videojuegos. Deberá mostrar su: */}
+
       {currentVideogames?.map((game) => {
         return (
           <div key={game.id}>

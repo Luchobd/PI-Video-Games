@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { postVideogames, getGenders } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import "../stylesheets/VideoGameCreate.css";
