@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetail } from "../redux/actions/index";
-import NavBar from "./NavBar";
+import "../stylesheets/Detail.css";
 
 function Detail() {
-  // console.log(props);
   const dispatch = useDispatch();
   const { idVideogame } = useParams();
 
@@ -17,28 +16,41 @@ function Detail() {
   const gameDetail = useSelector((state) => state.detail);
 
   // console.log(dispatch(getDetail(props.match.params.idVideogame)));
-  // description_raw
+
   console.log(gameDetail);
   return (
-    <div>
-      <NavBar />
-      <div>
-        <h2>{gameDetail.name}</h2>
-        <h2>
+    <div className="detail__container">
+      <div className="detail__content">
+        <section className="detail__content_info">
+          <picture>
+            <img
+              src={gameDetail.background_image}
+              alt="image_detail"
+              width="200px"
+              weight="250px"
+            />
+          </picture>
+          <article>
+            <h2 className="detail__title">{gameDetail.name}</h2>
+            <h3>
+              {gameDetail.genres ? gameDetail.genres : gameDetail.genders}
+            </h3>
+            <h3>{gameDetail.released}</h3>
+            <h3>{gameDetail.rating}</h3>
+            <h3>{gameDetail.platforms}</h3>
+          </article>
+        </section>
+        <h5 className="detail__texto">
           {gameDetail.description_raw
             ? gameDetail.description_raw
             : gameDetail.description}
-        </h2>
-        <h3>{gameDetail.genres ? gameDetail.genres : gameDetail.genders}</h3>
-        <h3>{gameDetail.released}</h3>
-        <h4>{gameDetail.rating}</h4>
-        <h5>{gameDetail.platforms}</h5>
-        <img
-          src={gameDetail.background_image}
-          alt="img not fouuuuund"
-          width="200px"
-          weight="250px"
-        />
+        </h5>
+
+        <div className="detail__btn">
+          <NavLink to="/home">
+            <button className="btn__back">Back</button>
+          </NavLink>
+        </div>
       </div>
     </div>
   );

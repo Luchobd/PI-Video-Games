@@ -13,11 +13,7 @@ function NavBar() {
               <img src={MiniLogo} alt="Logo" className="navbar__link_img" />
             </NavLink>
           </picture>
-          {/* <li>
-            <NavLink className={"btn navbar__link"} exact to={"/"}>
-              Principal
-            </NavLink>
-          </li> */}
+
           <li>
             <NavLink className={"navbar__link"} to={"/home"}>
               Home

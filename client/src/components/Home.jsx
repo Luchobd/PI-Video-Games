@@ -12,8 +12,9 @@ import { NavLink } from "react-router-dom";
 import Card from "./Card";
 import SearchBar from "./SearchBar";
 import Paginated from "./Paginated";
-import "../stylesheets/Home.css";
 import NavBar from "./NavBar";
+import "../stylesheets/Home.css";
+import GifLoading from "../images/render.gif";
 
 function Home() {
   // usar hooks
@@ -79,7 +80,7 @@ function Home() {
   return (
     <div>
       <NavBar />
-      <SearchBar />
+      {/* <SearchBar /> */}
 
       {/* Paginated */}
       <Paginated
@@ -117,8 +118,7 @@ function Home() {
 
         {/* reset all */}
         <button className="home__btn_reset" onClick={(e) => handleClick(e)}>
-          Reset <br />
-          Videogames
+          Reset
         </button>
 
         {/* Botones/Opciones para filtrar por género y por videojuego existente o agregado por nosotros */}
@@ -155,30 +155,40 @@ function Home() {
         </section>
       </div>
       {/* Área donde se verá el listado de videojuegos. Deberá mostrar su: */}
-
-      {currentVideogames?.map((game) => {
-        return (
-          <div key={game.id}>
-            <NavLink className={"link"} to={`/videogame/${game.id}`}>
-              <Card
-                name={game.name}
-                genders={game.genders}
-                rating={game.rating}
-                background_image={
-                  game.background_image ? (
-                    game.background_image
-                  ) : (
-                    <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVjBJWlHCDYQu_KapwEg1c3SFFxYoW3bpvmQ&usqp=CAU"
-                      alt="Default_Image"
-                    />
-                  )
-                }
-              />
-            </NavLink>
-          </div>
-        );
-      })}
+      {allVideogames.length ? (
+        <div className="home__render_cards">
+          {currentVideogames?.map((game) => {
+            return (
+              <div key={game.id}>
+                <NavLink
+                  to={`/videogame/${game.id}`}
+                  className="home__link_cards"
+                >
+                  <Card
+                    name={game.name}
+                    genders={game.genders.map((e) => e)}
+                    rating={"Rating: " + game.rating}
+                    background_image={
+                      game.background_image ? (
+                        game.background_image
+                      ) : (
+                        <img
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVjBJWlHCDYQu_KapwEg1c3SFFxYoW3bpvmQ&usqp=CAU"
+                          alt="Default_Image"
+                        />
+                      )
+                    }
+                  />
+                </NavLink>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <picture className="home__loading">
+          <img src={GifLoading} alt="Loading" />
+        </picture>
+      )}
     </div>
   );
 }

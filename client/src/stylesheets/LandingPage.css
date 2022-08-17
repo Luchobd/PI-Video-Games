@@ -2,7 +2,6 @@
 .landingPage {
   width: 100%;
   height: 100vh;
-
   background-image: url(../images/80-805573_darksiders-2-protagonist.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -27,7 +26,7 @@
 /* Parrafo */
 .landing__parragraf {
   padding-top: 10px;
-  color: papayawhip;
+  color: #ffefd5;
   width: 0;
   overflow: hidden;
   white-space: nowrap;

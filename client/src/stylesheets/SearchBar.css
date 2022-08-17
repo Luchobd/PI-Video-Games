@@ -3,15 +3,13 @@
 .search__form {
   display: flex;
   justify-content: center;
-  background-color: darkblue;
 }
 
 .search__form_input,
 .search__form_btn {
-  box-sizing: border-box;
-  /* appearance: none; */
   background-color: transparent;
   border: 2px solid #ffefd5;
+  outline: none;
   border-radius: 0.6em;
   color: #ffefd5;
   display: flex;
@@ -20,7 +18,7 @@
   font-weight: 400;
   line-height: 1;
   margin: 20px;
-  padding: 0.8em 2em;
+  /* padding: 0.3em 0.5em; */
   text-decoration: none;
   text-align: center;
   text-transform: uppercase;
@@ -41,7 +39,7 @@
 .search__form_btn {
   border-color: papayawhip;
   color: #fff;
-  box-shadow: 0 0 40px 40px #4fd1c5 inset, 0 0 0 0 #4fd1c5;
+  box-shadow: 0 0 40px 40px #4fd1c550 inset, 0 0 0 0 #4fd1c550;
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
   cursor: pointer;

@@ -43,8 +43,6 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: false, //  Son las dos (createdAt,updatedAt)
-      createdAt: false, // muestra cuando añado un nuevo un juego
-      updatedAt: false, // Muestra la modificacion dle video juego
     }
   );
 };

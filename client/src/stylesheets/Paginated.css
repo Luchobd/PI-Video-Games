@@ -1,26 +1,41 @@
+.paginated__principal_container {
+  display: flex;
+  justify-content: space-around;
+  /* background-color: cornflowerblue; */
+}
+
 .paginated__container ul {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   list-style: none;
   margin: 20px 0 30px;
 }
 
 .paginated button {
-  padding: 3px 5px;
+  padding: 0 1px;
   background-color: transparent;
   text-align: center;
   font-size: 1rem;
   font-weight: bold;
   color: #ffefd5;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  /* letter-spacing: 1px; */
+  text-transform: lowercase;
   border: 2px solid #ffefd5;
-  border-radius: 10px;
+
   cursor: pointer;
+  box-shadow: 2px 2px 15px #3498db90 inset;
 }
 
+.paginated button:nth-child(2n) {
+  color: red;
+}
+
+/* 4fd1c550 */
+
 .paginated button:focus {
-  background-color: #3498db;
+  color: #07ff07;
+  border-color: #3498db;
   font-size: 1.2rem;
   font-weight: bold;
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
 }

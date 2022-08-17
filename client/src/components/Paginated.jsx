@@ -1,4 +1,5 @@
 import React from "react";
+import SearchBar from "./SearchBar";
 import "../stylesheets/Paginated.css";
 
 function Paginated({ videogamesPerPage, allVideogames, paginated }) {
@@ -9,18 +10,21 @@ function Paginated({ videogamesPerPage, allVideogames, paginated }) {
     page++;
   }
   return (
-    <nav className="paginated__container">
-      <ul className="paginated">
-        {pageNumbers &&
-          pageNumbers.map((number) => (
-            <li key={number}>
-              <button
-                onClick={() => paginated(number)}
-              >{`Pag: ${number}`}</button>
-            </li>
-          ))}
-      </ul>
-    </nav>
+    <div className="paginated__principal_container">
+      <nav className="paginated__container">
+        <ul className="paginated">
+          {pageNumbers &&
+            pageNumbers.map((number) => (
+              <li key={number}>
+                <button onClick={() => paginated(number)}>{`${number}`}</button>
+              </li>
+            ))}
+        </ul>
+      </nav>
+      <div>
+        <SearchBar />
+      </div>
+    </div>
   );
 }
 

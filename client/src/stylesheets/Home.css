@@ -16,14 +16,18 @@
 
 .home__option_select {
   padding: 3px 0;
-  background-color: transparent;
+  background-color: #070d1f;
   text-align: center;
   font-weight: bold;
-  color: #805300;
+
   letter-spacing: 1px;
   text-transform: uppercase;
   border: 2px solid #ffefd5;
   border-radius: 10px;
+  outline: none;
+  color: papayawhip;
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+  cursor: pointer;
 }
 
 .home__btn_reset {
@@ -32,13 +36,42 @@
   background-color: transparent;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
-  color: #ffd700;
+  color: #07ff07;
+  box-shadow: 2px 2px 15px #3498db inset;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .home__btn_reset:hover {
   transform: rotate(180deg);
   transition: transform 0.5s linear 0.1s;
-  box-shadow: 0 0 30px #ffd700;
+  box-shadow: 0 0 30px #3498db;
+  color: #ffd700;
   cursor: pointer;
+}
+
+/* Render of Cards */
+.home__render_cards {
+  padding: 30px 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  gap: 50px 100px;
+}
+
+.home__link_cards {
+  text-decoration: none;
+}
+
+/* Loading */
+.home__loading h2 {
+  color: transparent;
+  font-size: 1.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.home__loading {
+  display: flex;
+  justify-content: center;
 }

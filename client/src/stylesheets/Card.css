@@ -1,0 +1,52 @@
+.card__container {
+  /* min-width: 150px; */
+  height: 50vh;
+  padding: 10px;
+  background-color: transparent;
+  border: 2px solid 3498db;
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+  text-align: center;
+  color: #ffefd5;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card__container:hover {
+  color: #07ff07;
+  box-shadow: 2px 2px 15px #3498db inset;
+}
+
+.card__content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.card__title {
+  text-transform: uppercase;
+}
+
+/* card img */
+.card__img img {
+  /* width: 10vw; */
+  height: 25vh;
+  outline: 5px solid #3498db50;
+  border-radius: 10px;
+  box-shadow: -8px 5px 10px 0 gold;
+}
+
+.card__img img:hover {
+  box-shadow: 0 0 30px #07ff07;
+}
+
+/* genders */
+/* rating */
+.card__genders,
+.card__rating {
+  font-size: 1.2rem;
+}

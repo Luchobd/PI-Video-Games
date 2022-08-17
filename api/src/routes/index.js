@@ -96,7 +96,7 @@ router.get("/videogame/:idVideogame", async (req, res) => {
 
   const dbInfo = await getDBInfo();
   const findDBInfo = dbInfo.find((item) => item.id.toString() === idVideogame);
-  console.log(findDBInfo);
+
   if (idVideogame) {
     if (findDBInfo) {
       const {
@@ -208,7 +208,7 @@ router.post("/videogames", async (req, res) => {
         createdInDb,
         background_image,
       });
-      console.log(createdVideoGames);
+
       let genderDB = await Gender.findAll({
         where: { name: gender },
       });
