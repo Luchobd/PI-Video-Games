@@ -8,10 +8,10 @@ function Card({ name, genders, rating, background_image }) {
   return (
     <div className="card__container">
       <div className="card__content">
-        <h2 className="card__title">{name}</h2>
         <picture className="card__img">
           <img src={background_image} alt={name} width="250" />
         </picture>
+        <h2 className="card__title">{name}</h2>
         <h3 className="card__genders">
           {typeof genders[0] === "object"
             ? genders.map((e) => e.name + " ")

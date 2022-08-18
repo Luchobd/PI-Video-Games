@@ -1,6 +1,8 @@
 import React from "react";
 import SearchBar from "./SearchBar";
+import { Link } from "react-router-dom";
 import "../stylesheets/Paginated.css";
+import Logo from "../images/landing-name.png";
 
 function Paginated({ videogamesPerPage, allVideogames, paginated }) {
   const pageNumbers = [];
@@ -21,6 +23,11 @@ function Paginated({ videogamesPerPage, allVideogames, paginated }) {
             ))}
         </ul>
       </nav>
+      <picture className="paginated__logo">
+        <Link to="/">
+          <img src={Logo} alt="Logo" />
+        </Link>
+      </picture>
       <div>
         <SearchBar />
       </div>

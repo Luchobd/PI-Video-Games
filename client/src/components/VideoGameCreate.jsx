@@ -31,8 +31,9 @@ function validate(input) {
     errors.name = "Please complete the input name";
   } else if (!input.description) {
     errors.description = "Please complete the input description";
+  } else if (!input.platforms.length) {
+    errors.platforms = "requires placing at least one platform";
   }
-
   return errors;
 }
 
@@ -171,6 +172,11 @@ function VideoGameCreate() {
             {errors.description && (
               <p className="create__error_inputs">{errors.description}</p>
             )}
+            {!input.platforms.length
+              ? errors.platforms && (
+                  <p className="create__error_inputs">{errors.platforms}</p>
+                )
+              : " "}
           </aside>
 
           {/* Inputs and Selects */}

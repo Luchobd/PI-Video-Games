@@ -10,7 +10,6 @@ import {
 } from "../redux/actions";
 import { NavLink } from "react-router-dom";
 import Card from "./Card";
-import SearchBar from "./SearchBar";
 import Paginated from "./Paginated";
 import NavBar from "./NavBar";
 import "../stylesheets/Home.css";
@@ -98,8 +97,8 @@ function Home() {
             onChange={(e) => handleOrderByRating(e)}
           >
             <optgroup label="Rating">
-              <option value="ascRtg">Ascending</option>
-              <option value="descRtg">Decendents</option>
+              <option value="ascRtg">1 - 5</option>
+              <option value="descRtg">5 - 1</option>
             </optgroup>
           </select>
         </section>
@@ -110,8 +109,8 @@ function Home() {
             onChange={(e) => handleOrderByName(e)}
           >
             <optgroup label="Alphabetic">
-              <option value="ascAlf">Ascending</option>
-              <option value="descAlf">Decendents</option>
+              <option value="ascAlf">A - Z</option>
+              <option value="descAlf">Z - A</option>
             </optgroup>
           </select>
         </section>

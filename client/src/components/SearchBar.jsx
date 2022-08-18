@@ -31,7 +31,7 @@ function SearchBar() {
           onChange={(e) => handeleInputChange(e)}
         />
         <button type="submit" className="search__form_btn">
-          Search
+          GO
         </button>
       </form>
     </>
