@@ -9,6 +9,7 @@ export const ORDER_BY_RATING = "ORDER_BY_RATING";
 export const GET_NAME_VIDEOGAMES = "GET_NAME_VIDEOGAMES";
 export const POST_VIDEOGAME = "POST_VIDEOGAME";
 export const GET_DETAILS = "GET_DETAILS";
+export const CLEAN_FILTER = "CLEAN_FILTER";
 
 // Conection from back to front
 // Ruta video games
@@ -102,5 +103,12 @@ export function getDetail(idVideogame) {
       type: "GET_DETAILS",
       payload: detail.data,
     });
+  };
+}
+
+export function cleanFilter() {
+  return {
+    type: "CLEAN_FILTER",
+    payload: [],
   };
 }

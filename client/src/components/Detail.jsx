@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getDetail } from "../redux/actions/index";
+import { getDetail, cleanFilter } from "../redux/actions/index";
 import "../stylesheets/Detail.css";
 
 function Detail() {
@@ -11,11 +11,12 @@ function Detail() {
 
   useEffect(() => {
     dispatch(getDetail(idVideogame));
+    return () => {
+      dispatch(cleanFilter());
+    };
   }, [dispatch, idVideogame]);
 
   const gameDetail = useSelector((state) => state.detail);
-
-  // console.log(dispatch(getDetail(props.match.params.idVideogame)));
 
   console.log(gameDetail);
   return (

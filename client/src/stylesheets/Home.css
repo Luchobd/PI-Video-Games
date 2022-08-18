@@ -16,6 +16,7 @@
 }
 
 .home__option_select {
+  min-width: 235px;
   padding: 3px 0;
   background-color: #070d1f;
   text-align: center;

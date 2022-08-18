@@ -2,7 +2,7 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import "../stylesheets/Paginated.css";
-import Logo from "../images/landing-name.png";
+import Logo from "../images/GAMEWORLD3.png";
 
 function Paginated({ videogamesPerPage, allVideogames, paginated }) {
   const pageNumbers = [];

@@ -73,14 +73,9 @@ router.get("/videogames", async (req, res) => {
         game.name.toLowerCase().includes(name.toLowerCase())
       );
       // Respuesta maximo 15 juegos. Tanto de la API como DB
-      if (nameGames.length > 15) {
-        const slicePage = nameGames.slice(0, 15);
-        res.status(200).send(slicePage);
-      } else {
-        nameGames.length
-          ? res.status(200).send(nameGames)
-          : res.status(404).send("No se encuentra el Juego");
-      }
+      nameGames.length
+        ? res.status(200).send(nameGames)
+        : res.status(200).send(["Game not found"]);
     } else {
       // GET /videogames
       res.status(200).send(allVideogames);

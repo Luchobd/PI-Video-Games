@@ -8,6 +8,7 @@ import {
   ORDER_BY_RATING,
   POST_VIDEOGAME,
   GET_DETAILS,
+  CLEAN_FILTER,
 } from "../actions";
 const initialState = {
   videogames: [],
@@ -111,6 +112,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         videogames: sortedRtg,
+      };
+
+    case CLEAN_FILTER:
+      return {
+        ...state,
+        detail: action.payload,
       };
 
     default:

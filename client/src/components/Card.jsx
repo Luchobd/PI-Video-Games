@@ -9,7 +9,7 @@ function Card({ name, genders, rating, background_image }) {
     <div className="card__container">
       <div className="card__content">
         <picture className="card__img">
-          <img src={background_image} alt={name} width="250" />
+          <img src={background_image} alt={name} />
         </picture>
         <h2 className="card__title">{name}</h2>
         <h3 className="card__genders">

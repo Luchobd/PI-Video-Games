@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { postVideogames, getGenders } from "../redux/actions";
+import { postVideogames, getGenders, getVideogames } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import "../stylesheets/VideoGameCreate.css";
 import { platformsList } from "../utils/arrayPlatforms";
 import NavBar from "./NavBar";
+import "../stylesheets/VideoGameCreate.css";
 
 // Validaciones
 // function validate(input) {
@@ -25,21 +25,32 @@ import NavBar from "./NavBar";
 //   return errors;
 // }
 
-function validate(input) {
-  let errors = {};
-  if (!input.name) {
-    errors.name = "Please complete the input name";
-  } else if (!input.description) {
-    errors.description = "Please complete the input description";
-  } else if (!input.platforms.length) {
-    errors.platforms = "requires placing at least one platform";
-  }
-  return errors;
-}
-
 function VideoGameCreate() {
+  function validate(input) {
+    let errors = {};
+    if (!input.name) {
+      errors.name = "Please complete the input name";
+    } else if (
+      allVideogames.find(
+        (item) =>
+          item.name.replace(/\s+/g, "").toLowerCase() ===
+          input.name.replace(/\s+/g, "").toLowerCase()
+      )
+    ) {
+      errors.name = "the game exists!!";
+    } else if (!input.description) {
+      errors.description = "Please complete the input description";
+    } else if (!input.platforms.length) {
+      errors.platforms = "requires placing at least one platform";
+    } else if (!input.background_image) {
+      errors.background_image = "Please complete the input image";
+    }
+    return errors;
+  }
+
   const dispatch = useDispatch();
   const history = useHistory(); // redirige a la ruta que se le indique
+  const allVideogames = useSelector((state) => state.videogames);
   const allGenders = useSelector((state) => state.genders);
   const [errors, setErrors] = useState({});
 
@@ -67,6 +78,7 @@ function VideoGameCreate() {
 
   useEffect(() => {
     dispatch(getGenders());
+    dispatch(getVideogames());
   }, [dispatch]);
 
   const handleChange = (e) => {
@@ -83,27 +95,21 @@ function VideoGameCreate() {
     );
   };
 
-  // const handleCheck = (e) => { // Se trabaja con onChange
-  //   if (e.target.checked) {
-  //     setInput({
-  //       ...input,
-  //       status: e.target.value, // status es un valor del useState
-  //     });
-  //   }
-  // };
-
   const handleSelectGenders = (e) => {
-    setInput({
-      ...input,
-      gender: [...input.gender, e.target.value],
-    });
+    if (e.target.value !== "All")
+      setInput({
+        ...input,
+        gender: [...input.gender, e.target.value],
+      });
   };
 
   const handleSelectPlatforms = (e) => {
-    setInput({
-      ...input,
-      platforms: [...input.platforms, e.target.value],
-    });
+    if (e.target.value !== "All")
+      if (!input.platforms.includes(e.target.value))
+        setInput({
+          ...input,
+          platforms: [...input.platforms, e.target.value],
+        });
   };
 
   const handleDeleteGenders = (e) => {
@@ -177,6 +183,9 @@ function VideoGameCreate() {
                   <p className="create__error_inputs">{errors.platforms}</p>
                 )
               : " "}
+            {errors.background_image && (
+              <p className="create__error_inputs">{errors.background_image}</p>
+            )}
           </aside>
 
           {/* Inputs and Selects */}
@@ -224,7 +233,6 @@ function VideoGameCreate() {
                 onChange={(e) => handleChange(e)}
               />
             </div>
-            {/* {errors.rating && <p className="error">{errors.rating}</p>} */}
 
             <div className="create__inputs_rating-released">
               <label htmlFor="date">Release Date</label>
@@ -261,6 +269,7 @@ function VideoGameCreate() {
                 className="input__gender_form"
                 onChange={(e) => handleSelectGenders(e)}
               >
+                <option value="All">All</option>
                 {allGenders?.map((el) => (
                   <option value={el.name} key={el.id}>
                     {el.name}
@@ -290,6 +299,7 @@ function VideoGameCreate() {
                 className="input__platform_form"
                 onChange={(e) => handleSelectPlatforms(e)}
               >
+                <option value="All">All</option>
                 {allPlatforms?.map((item, index) => (
                   <option value={item.name} key={index}>
                     {item.name}
