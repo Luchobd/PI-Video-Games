@@ -2,7 +2,6 @@
   height: 50vh;
   padding-bottom: 15px;
   background-color: transparent;
-
   border-radius: 30px 30px 0 0;
   box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
   text-align: center;
@@ -25,7 +24,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .card__title {
@@ -54,5 +53,4 @@
 .card__genders,
 .card__rating {
   font-size: 1.1rem;
-  /* padding: 5px; */
 }

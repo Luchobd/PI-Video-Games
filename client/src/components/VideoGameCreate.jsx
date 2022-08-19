@@ -6,25 +6,6 @@ import { platformsList } from "../utils/arrayPlatforms";
 import NavBar from "./NavBar";
 import "../stylesheets/VideoGameCreate.css";
 
-// Validaciones
-// function validate(input) {
-//   let errors = {};
-//   if (!input.name) {
-//     errors.name = "Se requiere un Nombre";
-//   } else if (!input.description) {
-//     errors.description = "Se requiere una descripcion";
-//   } else if (!input.released) {
-//     errors.released = "Se requiere una fecha de salida";
-//   } else if (!input.rating || input.rating < 1 || input.rating > 5) {
-//     errors.rating = "rating invalido";
-//   } else if (!input.platforms) {
-//     errors.platforms = "Se requiere colocar por lo menos una plataforma";
-//   } else if (!input.gender.length) {
-//     errors.platforms = "Se requiere colocar por lo menos un genero";
-//   }
-//   return errors;
-// }
-
 function VideoGameCreate() {
   function validate(input) {
     let errors = {};

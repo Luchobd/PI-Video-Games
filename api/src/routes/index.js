@@ -103,6 +103,7 @@ router.get("/videogame/:idVideogame", async (req, res) => {
         rating,
         genders,
         platforms,
+        createdInDb,
       } = findDBInfo;
 
       const detailDBVideogames = {
@@ -114,6 +115,7 @@ router.get("/videogame/:idVideogame", async (req, res) => {
         rating,
         genders: genders.map((item) => item.name),
         platforms: platforms,
+        createdInDb,
       };
       res.status(200).json(detailDBVideogames);
     } else if (!findDBInfo) {
@@ -147,8 +149,6 @@ router.get("/videogame/:idVideogame", async (req, res) => {
       };
       res.status(200).json(detailVideogames);
     }
-  } else {
-    res.status(404).send("No Existe");
   }
 });
 
@@ -180,7 +180,6 @@ router.post("/videogames", async (req, res) => {
     released,
     rating,
     platforms,
-    createdInDb,
     gender,
     background_image,
   } = req.body;
@@ -200,7 +199,6 @@ router.post("/videogames", async (req, res) => {
         released,
         rating,
         platforms,
-        createdInDb,
         background_image,
       });
 

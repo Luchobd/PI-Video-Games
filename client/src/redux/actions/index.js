@@ -11,38 +11,27 @@ export const POST_VIDEOGAME = "POST_VIDEOGAME";
 export const GET_DETAILS = "GET_DETAILS";
 export const CLEAN_FILTER = "CLEAN_FILTER";
 
-// Conection from back to front
-// Ruta video games
-// export function getVideogames() {
-//   return async function (dispatch) {
-//     let resp = await fetch("http://localhost:3001/videogames");
-//     const videogames = await resp.json();
-//     return dispatch({
-//       type: "GET_VIDEOGAMES",
-//       payload: videogames,
-//     });
-//   };
-// }
-
-export function getVideogames() {
-  return async function (dispatch) {
-    const rutaVideogames = "http://localhost:3001/videogames";
-    const videogames = await axios.get(rutaVideogames);
-    return dispatch({
-      type: "GET_VIDEOGAMES",
-      payload: videogames.data,
+export const getVideogames = () => (dispatch) => {
+  return fetch("http://localhost:3001/videogames")
+    .then((resp) => resp.json())
+    .then((data) => {
+      dispatch({
+        type: "GET_VIDEOGAMES",
+        payload: data,
+      });
     });
-  };
-}
+};
 
 export function getGenders() {
-  return async function (dispatch) {
-    const rutaGenders = "http://localhost:3001/gender";
-    const genders = await axios.get(rutaGenders, {});
-    return dispatch({
-      type: "GET_GENDERS",
-      payload: genders.data,
-    });
+  return function (dispatch) {
+    return fetch("http://localhost:3001/gender")
+      .then((resp) => resp.json())
+      .then((data) => {
+        dispatch({
+          type: "GET_GENDERS",
+          payload: data,
+        });
+      });
   };
 }
 

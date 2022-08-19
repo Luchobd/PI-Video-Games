@@ -18,7 +18,7 @@ function Detail() {
 
   const gameDetail = useSelector((state) => state.detail);
 
-  console.log(gameDetail);
+  // console.log(gameDetail);
   return (
     <>
       <div className="detail__container">
@@ -52,6 +52,7 @@ function Detail() {
           </section>
         </div>
       </div>
+
       <div className="detail__btn">
         <NavLink to="/home">
           <button className="btn__back">Home</button>

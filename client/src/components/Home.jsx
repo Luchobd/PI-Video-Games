@@ -38,10 +38,6 @@ function Home() {
     setCurrentPege(pageNumber);
   };
 
-  // ===========================================================================
-
-  // IMPORTANTE
-  // Traer los personajes cuando se monta el componente
   useEffect(() => {
     dispatch(getVideogames());
     dispatch(getGenders());
@@ -81,7 +77,9 @@ function Home() {
     <div>
       <NavBar />
       {allVideogames[0] === "Game not found" ? (
-        <div>Not Found</div>
+        <div className="home__not_exist">
+          <h2>Videogame Not Exist!!</h2>
+        </div>
       ) : (
         <div>
           <Paginated
