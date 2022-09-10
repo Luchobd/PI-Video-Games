@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.eb141bb0.chunk.css",
+    "main.js": "/static/js/main.1e6ac9c5.chunk.js",
+    "main.js.map": "/static/js/main.1e6ac9c5.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0a9e9d62.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0a9e9d62.js.map",
+    "static/js/2.9c1a236a.chunk.js": "/static/js/2.9c1a236a.chunk.js",
+    "static/js/2.9c1a236a.chunk.js.map": "/static/js/2.9c1a236a.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.eb141bb0.chunk.css.map": "/static/css/main.eb141bb0.chunk.css.map",
+    "static/js/2.9c1a236a.chunk.js.LICENSE.txt": "/static/js/2.9c1a236a.chunk.js.LICENSE.txt",
+    "static/media/404.a7ea7627.gif": "/static/media/404.a7ea7627.gif",
+    "static/media/LandingPage.css": "/static/media/80-805573_darksiders-2-protagonist.10ce0e57.jpg",
+    "static/media/GAMEWORLD2.c4cb1ef7.png": "/static/media/GAMEWORLD2.c4cb1ef7.png",
+    "static/media/GAMEWORLD3.c7bdc8b6.png": "/static/media/GAMEWORLD3.c7bdc8b6.png",
+    "static/media/NotFound.css": "/static/media/gameover404.def3c8f0.jpg",
+    "static/media/logo.3c4275df.png": "/static/media/logo.3c4275df.png",
+    "static/media/render.2cfe601a.gif": "/static/media/render.2cfe601a.gif",
+    "static/media/Thanks.css": "/static/media/thk.a91bc2ab.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0a9e9d62.js",
+    "static/js/2.9c1a236a.chunk.js",
+    "static/css/main.eb141bb0.chunk.css",
+    "static/js/main.1e6ac9c5.chunk.js"
+  ]
+}
